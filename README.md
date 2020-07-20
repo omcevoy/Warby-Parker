@@ -2,7 +2,7 @@
 
 This analysis of Warby-Parker was done as a part of the Data Science Path on Codecademy. The general gist of the problem at hand is that Warby-Parker is an eyewear company that is attempting to do business in a different way than its competitors. First, the company has its customers take a style quiz to determine which products they might be interested in. Then Warby-Parker sends the customer a few pairs to try on and ideally, the customer then purchases one of the pairs. Another interesting aspect of this study is that we are conducting an A/B test, with 50% of the customers receiving 3 pairs to try on with the other 50% receiving 5 pairs, in order to determine if the number of pairs has an impact on the customers decision to purchase a pair of sunglasses. 
 
-The relevant data for this analysis is spread across 3 tables: quiz, home_try_on, & purchase 
+The relevant data for this analysis is spread across 3 tables: **quiz, home_try_on, & purchase**. 
 
 Below are some the queries that I wrote and take-aways I was able to obtain. 
 
@@ -22,7 +22,7 @@ SELECT COUNT(*) AS "Total",
       1.0 * SUM(is_purchase) / SUM(is_home_try_on) as "HTO_to_Purchase"
 FROM funnel;
 ```
-This query is useful as it calculates the conversion rate of the customers who took the survey and then progressed to the home try on stage (75%) and also the conversion rate of the customers who purchased a product after trying it on (66%)
+This query is useful as it calculates the conversion rate of the customers who took the survey and then progressed to the home try on stage *(75%)* and also the conversion rate of the customers who purchased a product after trying it on *(66%)*
 ```
 WITH funnel AS ( SELECT q.user_id, 
        h.user_id is not null as "is_home_try_on",
@@ -40,7 +40,7 @@ FROM funnel
 WHERE number_of_pairs IS NOT NULL
 GROUP BY number_of_pairs;
 ```
-With this query, I was able to analyze the results of the A/B test. The results showed that only 53% of customers who were sent 3 pairs of eyewear ended up purchasing something. In the group that was sent 5 pairs to try on, 79% of the customers ended up purchasing a product. With this information, it is clear that there is a significant result of sending customers more products to try on. 
+With this query, I was able to analyze the results of the A/B test. The results showed that only *53%* of customers who were sent 3 pairs of eyewear ended up purchasing something. In the group that was sent **5 pairs** to try on, **79%** of the customers ended up purchasing a product. With this information, it is clear that there is a significant result of sending customers more products to try on. 
 
 The following queries are remarkably simpler, but use the results of the quiz to develop a profile on Warby-Parker's customers. 
 ```
