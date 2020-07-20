@@ -29,3 +29,22 @@ SELECT number_of_pairs AS "Pairs_Sent",
 FROM funnel
 WHERE number_of_pairs IS NOT NULL
 GROUP BY number_of_pairs;
+
+
+--                                                   Simpler Queries                                         --
+
+SELECT style, COUNT(*) FROM quiz 
+GROUP BY style
+ORDER BY style desc;
+
+SELECT style, COUNT(*) FROM purchase
+GROUP BY style; 
+
+SELECT color, COUNT(*) FROM quiz 
+GROUP BY color
+ORDER BY 2 desc
+LIMIT 2;
+
+SELECT COUNT(*) FROM purchase
+WHERE color LIKE "%Tortoise%"
+or color LIKE "%Black%";
