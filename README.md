@@ -6,6 +6,7 @@ The relevant data for this analysis is spread across 3 tables: quiz, home_try_on
 
 Below are some the queries that I wrote and take-aways I was able to obtain. 
 
+```
 WITH funnel AS ( SELECT q.user_id, 
        h.user_id is not null as "is_home_try_on",
        h.number_of_pairs, 
@@ -20,9 +21,9 @@ SELECT COUNT(*) AS "Total",
       1.0 * SUM(is_home_try_on) / COUNT(*) as "Quiz_to_HTO",
       1.0 * SUM(is_purchase) / SUM(is_home_try_on) as "HTO_to_Purchase"
 FROM funnel;
-
+```
 This query is useful as it calculates the conversion rate of the customers who took the survey and then progressed to the home try on stage (75%) and also the conversion rate of the customers who purchased a product after trying it on (66%)
-
+```
 WITH funnel AS ( SELECT q.user_id, 
        h.user_id is not null as "is_home_try_on",
        h.number_of_pairs, 
@@ -38,20 +39,20 @@ SELECT number_of_pairs AS "Pairs_Sent",
 FROM funnel
 WHERE number_of_pairs IS NOT NULL
 GROUP BY number_of_pairs;
-
+```
 With this query, I was able to analyze the results of the A/B test. The results showed that only 53% of customers who were sent 3 pairs of eyewear ended up purchasing something. In the group that was sent 5 pairs to try on, 79% of the customers ended up purchasing a product. With this information, it is clear that there is a significant result of sending customers more products to try on. 
 
 The following queries are remarkably simpler, but use the results of the quiz to develop a profile on Warby-Parker's customers. 
-
+```
 SELECT style, COUNT(*) FROM quiz 
 GROUP BY style
 ORDER BY style desc;
 
 SELECT style, COUNT(*) FROM purchase
 GROUP BY style; 
-
+```
 The result of these queries reveal that there is an even split between men and women shopping for eyewear at Warby-Parker. 
-
+```
 SELECT color, COUNT(*) FROM quiz 
 GROUP BY color
 ORDER BY 2 desc
@@ -60,5 +61,5 @@ LIMIT 2;
 SELECT COUNT(*) FROM purchase
 WHERE color LIKE "%Tortoise%"
 or color LIKE "%Black%";
-
+```
 The quiz revealed that the 2 colors the customers are most interested in are Tortoise and Black. Additionally of the 495 purchases, 59% of them were either Tortoise or Black. With this in mind, it is important that Warby-Parker stay well stocked with these styles. 
